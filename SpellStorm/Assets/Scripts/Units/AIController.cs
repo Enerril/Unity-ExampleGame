@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+
+
+public delegate void Born();
+public delegate void StartFight(GameObject attacker,GameObject prey);
 public class AIController : MonoBehaviour
 {
+    public event Born bornWasI;
+    public event StartFight startFight;
     public GameObject go;
     RandomWalking goWalking;
     Sight goSight;
@@ -12,6 +18,7 @@ public class AIController : MonoBehaviour
     private void OnEnable()
     {
         goSight = this.GetComponent<Sight>();
+        goWalking = this.GetComponent<RandomWalking>();
         goSight.SeeEnemy += EnemyDetected;
     }
 
@@ -22,8 +29,8 @@ public class AIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        goWalking = this.GetComponent<RandomWalking>();
+        bornWasI?.Invoke();
+        
        
 
 
@@ -37,8 +44,12 @@ public class AIController : MonoBehaviour
     }
 
 
-    public void EnemyDetected(string tagName)
+    public void EnemyDetected(GameObject go, GameObject goe)
     {
-        Debug.LogFormat("I SEE {0}",tagName);
+     //   Debug.LogFormat("I SEE {0}",goe.tag);
+
+        
+        startFight?.Invoke(go,goe);
+
     }
 }

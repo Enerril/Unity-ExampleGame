@@ -5,7 +5,7 @@ using UnityEngine;
 public class RandomWalking : MonoBehaviour
 {
     public GameObject go;
-    static  bool isWandering = true;
+    public  bool isWandering = true;
     private bool isActiveWalking = true;
     private bool isCoroutineActive = false;
     [Range(0, 10)] public float walkSpeed = 1f;

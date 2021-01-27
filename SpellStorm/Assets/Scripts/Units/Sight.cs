@@ -2,7 +2,7 @@
 using UnityEngine;
 using System;
 
-public delegate void SawEnemy(string tagName);
+public delegate void SawEnemy(GameObject go, GameObject goe);
 
 
 public class Sight : MonoBehaviour
@@ -11,12 +11,12 @@ public class Sight : MonoBehaviour
 
     public GameObject go;
 
-    private bool seeAnything = false;
+    public bool seeAnything = false;
    // public bool test = true;
 
-    private CircleCollider2D circleCollider2;
+    public CircleCollider2D circleCollider2;
 
-    private float defaultColliderSize;
+    public float defaultColliderSize;
     private float expandCollider = 2f;
     private float maxSight = 6;
     private string goTag;
@@ -69,7 +69,7 @@ public class Sight : MonoBehaviour
         if (collision.gameObject.tag==enemyTags[0] || collision.gameObject.tag == enemyTags[1])
         {
          //   Debug.LogFormat(collision.gameObject.tag);
-            SeeEnemy?.Invoke(collision.gameObject.tag); // just making a note. I had problem with the class aicontroller. I could not link method to event. Everything seemed okay but that bloody event did not have method in it. After ~2 hours of butthurt debuggin/googlin' I found out that i forgot to attach aicontroller.cs to gameobject prefab....boy was I furious!
+            SeeEnemy?.Invoke(go,collision.gameObject); // just making a note. I had problem with the class aicontroller. I could not link method to event. Everything seemed okay but that bloody event did not have method in it. After ~2 hours of butthurt debuggin/googlin' I found out that i forgot to attach aicontroller.cs to gameobject prefab....boy was I furious!
             //   Debug.LogFormat("{0} NOTICED {1}", gameObject.name, collision.gameObject.tag); \\ collision.gameObject.tag == "Castle2"
         }
     }

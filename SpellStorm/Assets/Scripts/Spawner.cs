@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 50; i++)
         {
             Instantiate(go, transform.position, transform.rotation);
         }

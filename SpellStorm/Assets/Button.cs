@@ -23,6 +23,8 @@ public class Button : MonoBehaviour
     {
         randomWalking = FindObjectOfType<RandomWalking>();
         randomWalking.ToggleWandering();
-        Debug.Log("CLICK");
+        Debug.Log("CLICK EXECUTED");
+
+        //
     }
 }
