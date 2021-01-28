@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 1917739755}
   - component: {fileID: -3025896698617870785}
   - component: {fileID: 3651380671145994132}
+  - component: {fileID: -6580953888421118850}
   m_Layer: 0
   m_Name: StandartFigtherPr 1
   m_TagString: Enemy1
@@ -211,6 +212,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go: {fileID: 2061034629653196091}
+  seeAnything: 0
+  circleCollider2: {fileID: 0}
+  defaultColliderSize: 0
 --- !u!114 &-3025896698617870785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,6 +240,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81383782ea2ee2244b73a424552901d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectile: {fileID: 276015057148452960, guid: a24c6a4c0e48ad746963832ab005f418,
+    type: 3}
+--- !u!114 &-6580953888421118850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061034629653196091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dc1765ddea931f44b72bb1b302ec5c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!1 &4987219480237779993
 GameObject:
   m_ObjectHideFlags: 0

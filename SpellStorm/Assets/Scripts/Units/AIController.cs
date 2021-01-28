@@ -6,11 +6,16 @@ using System;
 
 
 public delegate void Born();
-public delegate void StartFight(GameObject attacker,GameObject prey);
+public delegate void startClosing(ref GameObject   attacker,ref GameObject  prey);
+
+public delegate void Died();
+
+
 public class AIController : MonoBehaviour
 {
     public event Born bornWasI;
-    public event StartFight startFight;
+    public event Died DiedIHave;
+    public event startClosing startClosing;
     public GameObject go;
     RandomWalking goWalking;
     Sight goSight;
@@ -44,12 +49,12 @@ public class AIController : MonoBehaviour
     }
 
 
-    public void EnemyDetected(GameObject go, GameObject goe)
+    public void EnemyDetected(ref GameObject go, ref GameObject goe)
     {
-     //   Debug.LogFormat("I SEE {0}",goe.tag);
+        Debug.LogFormat("I SEE {0}",goe.tag);
 
+
+        startClosing?.Invoke(ref go,ref goe);
         
-        startFight?.Invoke(go,goe);
-
     }
 }

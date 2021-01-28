@@ -10,6 +10,8 @@ TagManager:
   - Enemy2
   - EnemyBody1
   - EnemyBody2
+  - Fireball1
+  - Fireball2
   layers:
   - Default
   - TransparentFX
@@ -21,8 +23,8 @@ TagManager:
   - 
   - UnitBody1
   - UnitBody2
-  - 
-  - 
+  - Fireball1
+  - Fireball2
   - 
   - 
   - 
