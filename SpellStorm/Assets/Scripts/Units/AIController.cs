@@ -6,7 +6,7 @@ using System;
 
 
 public delegate void Born();
-public delegate void startClosing(ref GameObject   attacker,ref GameObject  prey);
+public delegate void startClosing( GameObject   attacker, GameObject  prey);
 
 public delegate void Died();
 
@@ -24,12 +24,16 @@ public class AIController : MonoBehaviour
     {
         goSight = this.GetComponent<Sight>();
         goWalking = this.GetComponent<RandomWalking>();
-        goSight.SeeEnemy += EnemyDetected;
+        if (goSight != null)
+        {
+            goSight.SeeEnemy += EnemyDetected;
+        }
     }
 
     void OnDisable()
     {
         goSight.SeeEnemy -= EnemyDetected;
+        DiedIHave?.Invoke();
     }
     // Start is called before the first frame update
     void Start()
@@ -54,7 +58,7 @@ public class AIController : MonoBehaviour
         Debug.LogFormat("I SEE {0}",goe.tag);
 
 
-        startClosing?.Invoke(ref go,ref goe);
+        startClosing?.Invoke( go, goe);
         
     }
 }

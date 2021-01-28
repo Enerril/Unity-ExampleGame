@@ -10,6 +10,7 @@ public class FightMode : MonoBehaviour
     private RandomWalking goWalking;
     private Sight goSight;
     private AIController aiController;
+    private AIController enemyAIController;
     Fireball fireball;
 
 
@@ -34,6 +35,10 @@ public class FightMode : MonoBehaviour
     private void OnDisable()
     {
         aiController.startClosing -= StartClosingMode;
+        if (enemyAIController != null)
+        {
+            enemyAIController.DiedIHave -= EnemyKilled;
+        }
     }
 
     private void Start()
@@ -80,17 +85,26 @@ public class FightMode : MonoBehaviour
         }
     }
 
-    private void StartClosingMode(ref GameObject attacker, ref GameObject prey)
+    private void StartClosingMode( GameObject attacker,  GameObject prey)
     {
         goWalking.isWandering = false;
         goSight.seeAnything = true;
         goSight.circleCollider2.radius = goSight.defaultColliderSize;
+
+        Debug.Log(prey.name);
 
         this.attacker = attacker;
         this.prey = prey;
 
      //   Debug.Log(DistanceBetweenObjects(ref attacker, ref prey));
         closingMode = true;
+        if(prey.tag=="Castle1" || prey.tag == "Castle2")
+        {
+            return;
+        }
+        enemyAIController = prey.GetComponentInParent<AIController>();
+        //Debug.Log(enemyAIController);
+        enemyAIController.DiedIHave +=EnemyKilled;
     }
 
 
@@ -120,7 +134,16 @@ public class FightMode : MonoBehaviour
         isCoroutineActive = false;
     }
 
+    void EnemyKilled()
+    {
+        enemyAIController.DiedIHave -= EnemyKilled;
 
+        goWalking.isWandering = true;
+        goSight.seeAnything = false;
+        closingMode = false;
+        fightingMode = false;
+        //       Debug.Log("MY ENeMY IS DEAD");
+    }
 
 
 
