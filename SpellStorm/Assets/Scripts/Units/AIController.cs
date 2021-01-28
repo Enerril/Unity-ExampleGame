@@ -32,8 +32,11 @@ public class AIController : MonoBehaviour
 
     void OnDisable()
     {
-        goSight.SeeEnemy -= EnemyDetected;
-        DiedIHave?.Invoke();
+        if (goSight != null)
+        {
+            goSight.SeeEnemy -= EnemyDetected;
+    }
+    DiedIHave?.Invoke();
     }
     // Start is called before the first frame update
     void Start()
@@ -55,7 +58,7 @@ public class AIController : MonoBehaviour
 
     public void EnemyDetected(ref GameObject go, ref GameObject goe)
     {
-        Debug.LogFormat("I SEE {0}",goe.tag);
+     //   Debug.LogFormat("I SEE {0}",goe.tag);
 
 
         startClosing?.Invoke( go, goe);

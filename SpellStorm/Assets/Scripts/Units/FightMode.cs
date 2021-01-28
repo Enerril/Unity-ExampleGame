@@ -17,7 +17,7 @@ public class FightMode : MonoBehaviour
     private float defaultMinCastDistance = 3f;
     private float defaultMinMeleeDistance = 1f;
 
-    private float closingSpeed = 0.05f;
+    private float closingSpeed = 0.07f;
 
     private bool closingMode = false;
     private bool fightingMode = false;
@@ -59,7 +59,10 @@ public class FightMode : MonoBehaviour
         {
             if (!isCoroutineActive)
             {
-                StartCoroutine(StartFighting(attacker, prey));
+                if (attacker != null && prey != null)
+                {
+                    StartCoroutine(StartFighting(attacker, prey));
+                }
             }
            
         }
@@ -68,20 +71,32 @@ public class FightMode : MonoBehaviour
     private float DistanceBetweenObjects(ref GameObject obj1, ref GameObject obj2)
     {
         return Vector3.Distance(obj1.transform.position, obj2.transform.position);
+        /*  if (obj1 != null & obj1 != null)
+          {
+             // return Vector3.Distance(obj1.transform.position, obj2.transform.position);
+          }
+          else
+          {
+
+              return defaultMinCastDistance;
+          }*/
     }
 
     private void MoveTowardsEnemy(ref GameObject attacker, ref GameObject prey)
     {
         //  Debug.Log("WORK");
         // Debug.Log(attackerPos + "--- " + preyPos);
-        if (defaultMinCastDistance < DistanceBetweenObjects(ref attacker, ref prey))
+        if (attacker != null & prey != null)
         {
-            this.transform.position = Vector3.MoveTowards(attacker.transform.position, prey.transform.position, closingSpeed); // тоже минут на 20 залип из-за того что забыл инициализировать closingSpeed ppc
-        }
-        else
-        {
-            closingMode = false;
-            fightingMode = true;
+            if (defaultMinCastDistance < DistanceBetweenObjects(ref attacker, ref prey))
+            {
+                this.transform.position = Vector3.MoveTowards(attacker.transform.position, prey.transform.position, closingSpeed); // тоже минут на 20 залип из-за того что забыл инициализировать closingSpeed ppc
+            }
+            else
+            {
+                closingMode = false;
+                fightingMode = true;
+            }
         }
     }
 
@@ -91,17 +106,17 @@ public class FightMode : MonoBehaviour
         goSight.seeAnything = true;
         goSight.circleCollider2.radius = goSight.defaultColliderSize;
 
-        Debug.Log(prey.name);
+     //   Debug.Log(prey.name);
 
         this.attacker = attacker;
         this.prey = prey;
 
      //   Debug.Log(DistanceBetweenObjects(ref attacker, ref prey));
         closingMode = true;
-        if(prey.tag=="Castle1" || prey.tag == "Castle2")
+       /* if(prey.tag=="Castle1" || prey.tag == "Castle2")
         {
             return;
-        }
+        }*/
         enemyAIController = prey.GetComponentInParent<AIController>();
         //Debug.Log(enemyAIController);
         enemyAIController.DiedIHave +=EnemyKilled;
@@ -142,6 +157,7 @@ public class FightMode : MonoBehaviour
         goSight.seeAnything = false;
         closingMode = false;
         fightingMode = false;
+        
         //       Debug.Log("MY ENeMY IS DEAD");
     }
 
