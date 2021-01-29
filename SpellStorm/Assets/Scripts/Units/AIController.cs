@@ -1,24 +1,41 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-
-
+﻿using UnityEngine;
 
 public delegate void Born();
-public delegate void startClosing( GameObject   attacker, GameObject  prey);
 
 public delegate void Died();
 
+public delegate void startClosing(GameObject attacker, GameObject prey);
 
 public class AIController : MonoBehaviour
 {
-    public event Born bornWasI;
-    public event Died DiedIHave;
-    public event startClosing startClosing;
     public GameObject go;
-    RandomWalking goWalking;
-    Sight goSight;
+
+    private Sight goSight;
+
+    private RandomWalking goWalking;
+
+    public event Born bornWasI;
+
+    public event Died DiedIHave;
+
+    public event startClosing startClosing;
+
+    public void EnemyDetected(ref GameObject go, ref GameObject goe)
+    {
+        //   Debug.LogFormat("I SEE {0}",goe.tag);
+
+        startClosing?.Invoke(go, goe);
+    }
+
+    private void OnDisable()
+    {
+        if (goSight != null)
+        {
+            goSight.SeeEnemy -= EnemyDetected;
+        }
+    //    Debug.Log("I HAVE DIED");
+        DiedIHave?.Invoke();
+    }
 
     private void OnEnable()
     {
@@ -30,38 +47,14 @@ public class AIController : MonoBehaviour
         }
     }
 
-    void OnDisable()
-    {
-        if (goSight != null)
-        {
-            goSight.SeeEnemy -= EnemyDetected;
-    }
-    DiedIHave?.Invoke();
-    }
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         bornWasI?.Invoke();
-        
-       
-
-
-       
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
-    }
-
-
-    public void EnemyDetected(ref GameObject go, ref GameObject goe)
-    {
-     //   Debug.LogFormat("I SEE {0}",goe.tag);
-
-
-        startClosing?.Invoke( go, goe);
-        
     }
 }

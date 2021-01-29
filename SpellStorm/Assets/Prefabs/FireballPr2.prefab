@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2482040933749923048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.7112341, y: -1.3796672, z: 0.87529093}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -133,10 +133,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27df52bdc8a5d9f4b9221d48b1657dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 2482040933749923048}
-  attackerPos: {x: -2.6333077, y: 1.9216275, z: 0.75}
-  preyPos: {x: -5.56, y: 1.44, z: 0.75}
+  attackerPos: {x: 1.3331716, y: -3.1022196, z: 0.75}
   haveCoords: 1
+  preyPos: {x: -0.8222649, y: -1.0986896, z: 0.75}
+  projectile: {fileID: 2482040933749923048}
 --- !u!50 &3624725626982741820
 Rigidbody2D:
   serializedVersion: 4
