@@ -15,6 +15,7 @@ public class Fireball : MonoBehaviour
     private string goTag;
     private int initialDamage = 35;
     private Rigidbody2D rb;
+    float fireballLifeTime = 10f;
 
     public void SetCoordForFireball(GameObject attacker, GameObject prey)
     {
@@ -22,8 +23,31 @@ public class Fireball : MonoBehaviour
          preyPos = prey.transform.position;
 
         haveCoords = true;
-      //  Debug.Log(preyPos);
-        Instantiate(projectile, attackerPos, transform.rotation);
+        //  Debug.Log(preyPos);
+        /*
+        if (attacker.tag == "Enemy1")
+        {
+            GameObject fb1 = Pool.singleton.Get("Fireball1");
+            if (fb1 != null)
+            {
+                fb1.transform.position = attackerPos;
+                fb1.SetActive(true);
+            }
+        }else if (attacker.tag == "Enemy2")
+        {
+            GameObject fb2 = Pool.singleton.Get("Fireball2");
+            if (fb2 != null)
+            {
+                fb2.transform.position = attackerPos;
+                fb2.SetActive(true);
+            }
+        }
+        
+                
+                */
+                
+                
+                Instantiate(projectile, attackerPos, transform.rotation);
    
         /*
         this.attacker = attacker;
@@ -41,8 +65,8 @@ public class Fireball : MonoBehaviour
 
     private IEnumerator DestroyFireball()
     {
-        yield return new WaitForSeconds(2f);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(fireballLifeTime);
+        Destroy(this.gameObject);
     }
 
     private void GetEnemyTags()
@@ -61,13 +85,20 @@ public class Fireball : MonoBehaviour
         }
     }
 
-    private void MoveFireballTowardsEnemy(ref Vector3 attPos, ref Vector3 preyPosi)
+    private void MoveFireballTowardsEnemy( )
     {
-       // Debug.Log("preyPosi = " + preyPosi);
+        // Debug.Log("preyPosi = " + preyPosi);
+       //  var k = (preyPosi - this.transform.position);
+        //   Debug.Log(k);
+        //  this.rb.MovePosition(k);
+        // this.rb.AddForceAtPosition(this.transform.position, preyPosi);
 
-       // this.rb.AddForce(preyPosi);
-       // this.rb.AddForceAtPosition(this.transform.position, preyPosi);
-       this.transform.position = Vector3.MoveTowards(this.transform.position, preyPosi, fireballSpeed);
+        
+
+       // rb.velocity = preyPos - this.transform.position;
+
+
+         this.transform.position = Vector3.MoveTowards(this.transform.position, preyPos, fireballSpeed);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -86,6 +117,7 @@ public class Fireball : MonoBehaviour
     {
         this.rb = this.GetComponent<Rigidbody2D>();
         StartCoroutine(DestroyFireball());
+      //  rb.velocity = preyPos - this.transform.position;
     }
 
     // Update is called once per frame
@@ -99,7 +131,7 @@ public class Fireball : MonoBehaviour
         {
             //Debug.Log(haveCoords);
 
-            MoveFireballTowardsEnemy(ref attackerPos, ref preyPos);
+            MoveFireballTowardsEnemy();
         }
     }
 }

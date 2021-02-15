@@ -133,9 +133,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27df52bdc8a5d9f4b9221d48b1657dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackerPos: {x: 1.3331716, y: -3.1022196, z: 0.75}
+  attackerPos: {x: 4.93722, y: 2.9452317, z: 0.75}
   haveCoords: 1
-  preyPos: {x: -0.8222649, y: -1.0986896, z: 0.75}
+  preyPos: {x: 3.4774427, y: 0.37239707, z: 0.75}
   projectile: {fileID: 2482040933749923048}
 --- !u!50 &3624725626982741820
 Rigidbody2D:
@@ -149,12 +149,12 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
